@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'models/shared_prefs.dart';
-import 'pages/completed_list.dart';
+import 'package:todo/pages/completed_list.dart';
+import 'pages/using_database_page.dart';
+import 'package:todo/pages/using_database_completed_lists.dart';
+import 'package:todo/pages/edit_todo_list.dart';
 
 var homePageKey = GlobalKey<_MyListsState>();
 
@@ -18,6 +21,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      initialRoute: '/',
+      routes: {
+        '/database': (BuildContext context) => UsingDatabasePage(),
+        '/completed': (BuildContext context) => CompletedLists(),
+      },
       home: MyLists(key: homePageKey),
     );
   }
@@ -67,9 +75,7 @@ class _MyListsState extends State<MyLists> {
             icon: Icon(Icons.list),
             onPressed: () {
               setState(() {});
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => CompletedLists(),
-              ));
+              Navigator.of(context).pushNamed('/completed');
             },
           )
         ],
@@ -217,9 +223,19 @@ class _MyListsState extends State<MyLists> {
                     );
                   },
                 ),
+              ),
+              Container(
+                margin: const EdgeInsets.all(10.0),
+                child: InkWell(
+                  child: Text(
+                    'Link to TodoLists using DB',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onTap: () => Navigator.of(context).pushNamed('/database'),
+                ),
               )
             ],
-          )
+          ),
         ],
       ),
     );
