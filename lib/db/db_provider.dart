@@ -63,7 +63,7 @@ class DBProvider {
         where: 'id = ?', whereArgs: [id]);
   }
 
-  w completeTodo(int id, int status) async {
+  completeTodo(int id, int status) async {
     final db = await database;
     await db.update('todos', {'is_done': status},
         where: 'id = ?', whereArgs: [id]);
