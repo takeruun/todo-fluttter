@@ -134,7 +134,7 @@ class _EditState extends State<Edit> {
                   todo.title = eCtrlT.text;
                   todo.sub_title = eCtrlS.text;
                   await DBProvider.db.updateTodoList(todo);
-                  Navigator.of(context).popAndPushNamed('/database');
+                  Navigator.of(context).pop();
                 },
               ))
             ],
